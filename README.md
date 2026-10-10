@@ -1,4 +1,4 @@
-# 🛡️ AI-Fake-Image-Detector: Generalization & Attribution Framework
+# 🔬 Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg)](https://pytorch.org/)
@@ -151,7 +151,7 @@ If you use this benchmark codebase, pipeline, or research findings in your work,
 ```bibtex
 @misc{m2026aifakedetector,
   author       = {Eshan M},
-  title        = {AI-Fake-Image-Detector: Generalization & Attribution Framework across GAN and Diffusion Models},
+  title        = {Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators},
   year         = {2026},
   publisher    = {GitHub},
   howpublished = {\url{https://github.com/m-eshan/AI-Fake-Image-Detector}}
