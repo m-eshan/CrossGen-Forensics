@@ -23,3 +23,5 @@ checkpoints/
 results/
 tmp/
 *.crdownload
+*.drawio
+paper/

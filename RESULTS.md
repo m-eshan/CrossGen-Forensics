@@ -10,7 +10,7 @@ All high-resolution figures are generated and stored under the [`assets/`](asset
 
 | Figure Asset | Description | Key Insight |
 | :--- | :--- | :--- |
-| ![Figure 5: Architecture](assets/figure5_system_architecture.png) | **Dedicated End-to-End System Architecture Diagram** | Illustrates the multi-stage pipeline: Input Image $\rightarrow$ JPEG Recompression ($Q \sim [65, 95]$) $\rightarrow$ Dense Feature Backbone (ResNet-50 / ConvNeXt-Tiny) $\rightarrow$ Dual Output Heads (Binary Detection & 6-Class Attribution). |
+| ![System Architecture](assets/CrossGen_Forensics_Architecture.png) | **Dedicated End-to-End System Architecture Diagram** | Illustrates the multi-stage pipeline: Input Image $\rightarrow$ JPEG Recompression ($Q \sim [65, 95]$) $\rightarrow$ Dense Feature Backbone (ResNet-50 / ConvNeXt-Tiny) $\rightarrow$ Dual Output Heads (Binary Detection & 6-Class Attribution). |
 | ![Figure 1: AUC Benchmark](assets/figure1_auc_benchmark_comparison.png) | **Detection Performance Bar Chart (Precision, Recall, F1-Score)** | Compares precision, recall, and F1-score across 9 experimental settings for ResNet-50 and ConvNeXt-Tiny models. |
 | ![Figure 3: ROC Curves](assets/figure3_roc_curves_comparison.png) | **ROC Curves: In-Distribution vs. Unseen-Generator vs. Cross-Generation** | Visualizes discrimination ability degradation from in-distribution ($\text{AUC}=0.9915$) to unseen generator ($\text{AUC}=0.8610$) and cross-generation ($\text{AUC}=0.6485$). |
 | ![Figure 6: PR Curves](assets/figure6_precision_recall_curves.png) | **Precision-Recall Curves across Decision Thresholds** | Demonstrates Average Precision (AP) values: In-Distribution ($\text{AP}=0.992$), Unseen Generator ($\text{AP}=0.865$), and Cross-Gen ($\text{AP}=0.638$). |
