@@ -53,7 +53,6 @@ deep_learning_lab_project/
 │   └── 04_attribution/04-attribution.ipynb                     # UNTOUCHED original
 ├── assets/
 │   ├── CrossGen_Forensics_Architecture.svg     # Vector System Architecture Diagram (Super Quality)
-│   ├── CrossGen_Forensics_Architecture.png     # System Architecture Diagram (Bitmap Fallback)
 │   ├── figure1_auc_benchmark_comparison.png    # Precision, Recall, F1 & AUC Chart
 │   ├── figure3_roc_curves_comparison.png       # ROC Curves Comparison
 │   ├── figure6_precision_recall_curves.png     # Precision-Recall Curves
