@@ -23,7 +23,7 @@ Modern generators including **Stable Diffusion 2.1, Stable Diffusion XL, Stable 
 
 ## 🏗️ System Architecture & Framework
 
-![System Architecture](assets/CrossGen_Forensics_Architecture.png)
+![System Architecture](assets/CrossGen_Forensics_Architecture.svg)
 
 The framework pipeline comprises four main stages:
 1. **Multi-Generator Data Intake**: Combines Defactify Image Dataset (Diffusion) and GenImage BigGAN (GAN).
@@ -52,7 +52,8 @@ deep_learning_lab_project/
 │   ├── 03_visualize_predictions/03-visualize-predictions.ipynb # UNTOUCHED original
 │   └── 04_attribution/04-attribution.ipynb                     # UNTOUCHED original
 ├── assets/
-│   ├── CrossGen_Forensics_Architecture.png     # System Architecture Diagram
+│   ├── CrossGen_Forensics_Architecture.svg     # Vector System Architecture Diagram (Super Quality)
+│   ├── CrossGen_Forensics_Architecture.png     # System Architecture Diagram (Bitmap Fallback)
 │   ├── figure1_auc_benchmark_comparison.png    # Precision, Recall, F1 & AUC Chart
 │   ├── figure3_roc_curves_comparison.png       # ROC Curves Comparison
 │   ├── figure6_precision_recall_curves.png     # Precision-Recall Curves
