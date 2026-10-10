@@ -1,11 +1,11 @@
-# 🔬 Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators
+# 🛡️ CrossGen-Forensics: AI-Generated Image Generalization & Attribution Framework
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg)](https://pytorch.org/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Notebooks-20BEFF.svg)](https://www.kaggle.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**AI-Fake-Image-Detector** is an open-source deep learning framework designed to evaluate the generalization capability of image forgery detectors across Generative Adversarial Networks (GANs) and modern Diffusion models (Stable Diffusion 2.1/3/XL, DALL-E 3, Midjourney v6). The system performs both binary Real vs. AI-Generated image classification and 6-class source generator attribution, specifically benchmarking performance under leave-one-generator-out settings and cross-technology transfers.
+**CrossGen-Forensics** is a deep learning forensic framework evaluating the generalization capability of AI-generated image detectors across Generative Adversarial Networks (GANs) and modern Diffusion models (Stable Diffusion 2.1/3/XL, DALL-E 3, Midjourney v6). The system benchmarks unseen-generator generalization, cross-generation transferability ($\text{GAN} \leftrightarrow \text{Diffusion}$), and 6-class source generator attribution.
 
 ---
 
@@ -149,12 +149,12 @@ We gratefully acknowledge the creators and research teams behind the open datase
 If you use this benchmark codebase, pipeline, or research findings in your work, please cite:
 
 ```bibtex
-@misc{m2026aifakedetector,
+@misc{m2026crossgenforensics,
   author       = {Eshan M},
-  title        = {Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators},
+  title        = {CrossGen-Forensics: AI-Generated Image Generalization & Attribution Framework across GAN and Diffusion Models},
   year         = {2026},
   publisher    = {GitHub},
-  howpublished = {\url{https://github.com/m-eshan/AI-Fake-Image-Detector}}
+  howpublished = {\url{https://github.com/m-eshan/CrossGen-Forensics}}
 }
 ```
 
