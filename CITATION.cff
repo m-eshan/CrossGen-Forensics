@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this benchmark or codebase in your research, please cite it using the metadata below."
+authors:
+  - family-names: "M"
+    given-names: "Eshan"
+title: "Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators"
+date-released: 2026-10-10
+url: "https://github.com/m-eshan/AI-Fake-Image-Detector"
+repository-code: "https://github.com/m-eshan/AI-Fake-Image-Detector"
+keywords:
+  - AI Image Detection
+  - Deepfake Forensics
+  - Generative Adversarial Networks
+  - Diffusion Models
+  - Transfer Learning
+  - Generator Attribution
+  - Synthetic Media Forensics

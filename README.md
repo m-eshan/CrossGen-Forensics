@@ -30,64 +30,7 @@ Unlike conventional approaches that primarily evaluate detectors on generators r
 
 ---
 
-## 🚦 Project Status Roadmap (What is Done vs. What is Yet to be Done)
-
-### ✅ What is Done:
-1. **Notebook Pipeline Creation & Validation on Kaggle**:
-   - `notebooks/01_ai_fake_image_detector/ai-fake-image-detector.ipynb`: Data preparation, dataset balancing, JPEG recompression pipeline, group-stratified train/val/test splitting.
-   - `notebooks/02_train/02-train.ipynb`: Training binary ResNet-50 classifiers across 18 experimental configurations (Frozen head vs. Full Fine-tuning across `seen_all`, `gan_to_diffusion`, `diffusion_to_gan`, and 6 `unseen_*` benchmarks).
-   - `notebooks/03_visualize_predictions/03-visualize-predictions.ipynb`: Interactive visualization and verification of model prediction grids with confidence scores.
-   - `notebooks/04_attribution/04-attribution.ipynb`: 6-class ResNet-50 source generator attribution, ConvNeXt-Tiny benchmark comparison, and CSV summary export.
-2. **Repository & Local Prediction Infrastructure**:
-   - `demo_predictor.py`: Standalone CLI tool for single-image inference and visual matplotlib display.
-   - Kaggle Kernel CLI sync and folder organization.
-
----
-
-### ⏳ What is Yet to be Done:
-1. **Dataset Download & Local Setup**:
-   - Download the raw HuggingFace **Defactify Image Dataset** (`Rajarshi-Roy-research/Defactify_Image_Dataset`).
-   - Download the **GenImage BigGAN** dataset for GAN representation.
-2. **Local Model Training / Verification (Optional)**:
-   - Run local inference or finetuning if PyTorch with CUDA is available locally.
-3. **GitHub Push**:
-   - Commit all scripts, notebook files, documentation, and evaluation assets to remote GitHub repository.
-
----
-
-## 📦 Dataset Download & Setup Guide
-
-### 1. Defactify Image Dataset (Diffusion Models + Real Photos)
-The primary dataset is hosted on Hugging Face Datasets:
-```bash
-pip install datasets huggingface_hub
-```
-Python script to pre-fetch the dataset:
-```python
-from datasets import load_dataset
-
-# Load Defactify Image Dataset (Stable Diffusion 2.1/3/XL, DALL-E 3, Midjourney v6, Real)
-defactify = load_dataset("Rajarshi-Roy-research/Defactify_Image_Dataset")
-print("Defactify Dataset Loaded:", defactify)
-```
-
-### 2. GenImage BigGAN Dataset (GAN Representation)
-Download the BigGAN subset from the official GenImage benchmark or Kaggle dataset:
-- **Kaggle Dataset**: `imagenet_ai_0419_biggan`
-- Structure expected by dataset loader:
-  ```
-  GenImage_BigGAN/
-  ├── train/
-  │   ├── ai/
-  │   └── nature/
-  └── val/
-      ├── ai/
-      └── nature/
-  ```
-
----
-
-## 🗂️ Project Notebook Pipeline Architecture
+## 📂 Project Repository Structure
 
 ```
 deep_learning_lab_project/
@@ -100,17 +43,43 @@ deep_learning_lab_project/
 │   │   └── 03-visualize-predictions.ipynb # Visual prediction grids & checkpoint validation
 │   └── 04_attribution/
 │       └── 04-attribution.ipynb           # 6-Class attribution & ConvNeXt-Tiny benchmark
-├── demo_predictor.py                      # Standalone CLI predictor for local evaluation
-└── README.md                              # Project documentation
+├── datasets/
+│   └── README.md                          # Detailed dataset acquisition & metadata schema guide
+├── scripts/
+│   └── evaluate.py                        # Standalone local batch evaluation & inference script
+├── demo_predictor.py                      # Interactive CLI visual prediction demo
+├── CITATION.cff                           # Repository citation metadata
+├── references.bib                         # BibTeX references for papers and datasets
+├── LICENSE                                # MIT License
+└── README.md                              # Main project documentation
 ```
 
 ---
 
-## 📊 Summary of Notebook Experimental Results
+## 📦 Datasets & Download Guide
 
-### 1. Binary Detection Benchmark (ResNet-50 & ConvNeXt-Tiny)
+| Dataset | Generators / Sources | Task | Dataset Source Link |
+| :--- | :--- | :--- | :--- |
+| **Defactify Image Dataset** | Stable Diffusion 2.1, SD XL, SD 3, DALL-E 3, Midjourney v6, Real Photos | Diffusion Detection & Attribution | [HuggingFace Dataset](https://huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset) |
+| **GenImage BigGAN** | BigGAN (`GenImage_BigGAN`), ImageNet Real (`ImageNet_real`) | GAN Detection & Attribution | [GenImage Benchmark](https://github.com/GenImage-Dataset/GenImage) / [Kaggle Dataset](https://www.kaggle.com/) |
 
-| Category | Experiment | ResNet-50 (Frozen) AUC | ResNet-50 (Fine-tuned) AUC | ConvNeXt-Tiny AUC | ResNet-50 Bal. Acc. | ConvNeXt Bal. Acc. |
+### 🛠️ Python Dataset Download Snippet
+```python
+from datasets import load_dataset
+
+# Download Defactify Image Dataset
+defactify = load_dataset("Rajarshi-Roy-research/Defactify_Image_Dataset", cache_dir="./datasets/hf_cache")
+print("Loaded Defactify splits:", defactify)
+```
+> For complete directory setup and metadata schema details, see [datasets/README.md](datasets/README.md).
+
+---
+
+## 📊 Experimental Results
+
+### 1. Binary Detection Benchmark (ResNet-50 vs. ConvNeXt-Tiny)
+
+| Category | Experiment Tag | ResNet-50 (Frozen) AUC | ResNet-50 (Finetuned) AUC | ConvNeXt-Tiny AUC | ResNet-50 Bal. Acc. | ConvNeXt Bal. Acc. |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
 | **In-Distribution** | `seen_all` | **0.9842** | **0.9915** | **0.9942** | **96.20%** | **97.10%** |
 | **Cross-Generation** | `gan_to_diffusion` | 0.6120 | 0.6485 | 0.6810 | 60.50% | 63.20% |
@@ -122,13 +91,11 @@ deep_learning_lab_project/
 | **Unseen Generator** | `unseen_Stable_Diffusion_3` | 0.8310 | 0.8740 | 0.8890 | 81.50% | 83.60% |
 | **Unseen Generator** | `unseen_Stable_Diffusion_XL` | 0.8470 | 0.8860 | 0.9010 | 82.90% | 84.80% |
 
-> **Key Finding**: In-distribution performance ($\text{AUC} > 0.99$) drops significantly when evaluated on cross-generation tasks ($\text{GAN} \leftrightarrow \text{Diffusion}$), proving that detectors partially rely on generator-specific artifacts rather than universal synthetic features.
-
 ---
 
 ### 2. Generator Attribution Benchmark (6-Class Identification)
 
-Evaluated across 6 target generators: **BigGAN, DALL-E 3, Midjourney v6, Stable Diffusion 2.1, Stable Diffusion 3, Stable Diffusion XL**.
+Evaluated across **BigGAN, DALL-E 3, Midjourney v6, Stable Diffusion 2.1, Stable Diffusion 3, and Stable Diffusion XL**:
 
 - **Overall Attribution Accuracy**: `92.40%`
 - **Macro Precision**: `0.9215`
@@ -139,18 +106,45 @@ Evaluated across 6 target generators: **BigGAN, DALL-E 3, Midjourney v6, Stable 
 
 ## 💻 Local Quick Start
 
-### 1. Install Dependencies
-```bash
-pip install torch torchvision matplotlib pandas numpy pillow scikit-learn datasets
-```
-
-### 2. Run Local CLI Visual Predictor
-To test any image locally using the model predictor:
+### 1. Single Image Prediction Demo
 ```bash
 python demo_predictor.py --image_path path/to/sample_image.jpg
 ```
 
+### 2. Batch Folder Evaluation Script
+```bash
+python scripts/evaluate.py --image_dir path/to/test_folder --checkpoint path/to/model.pt
+```
+
+---
+
+## 🙏 Acknowledgements
+
+We gratefully acknowledge the creators and research teams behind the open datasets and architectures used in this work:
+- **Defactify Image Dataset**: Rajarshi Roy et al., for creating and releasing the multi-generator dataset on Hugging Face.
+- **GenImage Benchmark**: Ming Zhu et al., for the large-scale AI-generated image detection benchmark dataset.
+- **BigGAN & ImageNet**: Andrew Brock et al. (BigGAN) and Jia Deng et al. (ImageNet).
+- **PyTorch & Torchvision**: The PyTorch core team and contributors.
+
+---
+
+## 📚 Citation
+
+If you use this benchmark codebase, pipeline, or research findings in your work, please cite:
+
+```bibtex
+@misc{m2026aifakedetector,
+  author       = {Eshan M},
+  title        = {Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators},
+  year         = {2026},
+  publisher    = {GitHub},
+  howpublished = {\url{https://github.com/m-eshan/AI-Fake-Image-Detector}}
+}
+```
+
+Full BibTeX references for datasets and model backbones are available in [references.bib](references.bib) and [CITATION.cff](CITATION.cff).
+
 ---
 
 ## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This repository is licensed under the [MIT License](LICENSE).
