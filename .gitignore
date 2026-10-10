@@ -1,0 +1,25 @@
+# Python & PyTorch
+__pycache__/
+*.py[cod]
+*$py.class
+*.pt
+*.pth
+*.onnx
+*.bin
+*.pkl
+
+# Kaggle & System
+.system_generated/
+.gemini/
+.idea/
+.vscode/
+.DS_Store
+*.log
+
+# Large Dataset Files & Output Caches
+datasets/
+data/
+checkpoints/
+results/
+tmp/
+*.crdownload

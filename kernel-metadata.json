@@ -1,0 +1,15 @@
+{
+  "id": "eshanm/deep-learning-lab-real-vs-fake-image-detection",
+  "title": "Deep Learning Lab Real Vs Fake Image Detection",
+  "code_file": "real_vs_fake_detection.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "true",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": []
+}
