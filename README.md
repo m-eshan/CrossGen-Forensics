@@ -43,11 +43,21 @@ deep_learning_lab_project/
 │   │   └── 03-visualize-predictions.ipynb # Visual prediction grids & checkpoint validation
 │   └── 04_attribution/
 │       └── 04-attribution.ipynb           # 6-Class attribution & ConvNeXt-Tiny benchmark
+├── assets/                                # High-resolution evaluation charts & heatmaps
+│   ├── figure1_auc_benchmark_comparison.png
+│   ├── figure2_attribution_confusion_matrix.png
+│   ├── figure3_roc_curves_comparison.png
+│   └── figure4_training_convergence_history.png
+├── results/                               # Exported CSV and JSON benchmark results
+│   ├── binary_detection_benchmark.csv
+│   └── attribution_metrics.json
 ├── datasets/
 │   └── README.md                          # Detailed dataset acquisition & metadata schema guide
 ├── scripts/
-│   └── evaluate.py                        # Standalone local batch evaluation & inference script
+│   ├── evaluate.py                        # Standalone local batch evaluation script
+│   └── generate_results_and_assets.py     # Figure & asset generation script
 ├── demo_predictor.py                      # Interactive CLI visual prediction demo
+├── RESULTS.md                             # Detailed visual results & performance analysis report
 ├── CITATION.cff                           # Repository citation metadata
 ├── references.bib                         # BibTeX references for papers and datasets
 ├── LICENSE                                # MIT License
@@ -75,9 +85,13 @@ print("Loaded Defactify splits:", defactify)
 
 ---
 
-## 📊 Experimental Results
+## 📊 Visual Assets & Experimental Results
+
+For complete detailed figures and analysis, see the dedicated [RESULTS.md](RESULTS.md) report.
 
 ### 1. Binary Detection Benchmark (ResNet-50 vs. ConvNeXt-Tiny)
+
+![Figure 1: AUC Comparison](assets/figure1_auc_benchmark_comparison.png)
 
 | Category | Experiment Tag | ResNet-50 (Frozen) AUC | ResNet-50 (Finetuned) AUC | ConvNeXt-Tiny AUC | ResNet-50 Bal. Acc. | ConvNeXt Bal. Acc. |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: |
@@ -93,14 +107,14 @@ print("Loaded Defactify splits:", defactify)
 
 ---
 
-### 2. Generator Attribution Benchmark (6-Class Identification)
+### 2. Generator Attribution Confusion Matrix & ROC Curves
 
-Evaluated across **BigGAN, DALL-E 3, Midjourney v6, Stable Diffusion 2.1, Stable Diffusion 3, and Stable Diffusion XL**:
+| 6-Class Attribution Heatmap | ROC Curves Comparison |
+| :---: | :---: |
+| ![Attribution Confusion Matrix](assets/figure2_attribution_confusion_matrix.png) | ![ROC Curves Comparison](assets/figure3_roc_curves_comparison.png) |
 
 - **Overall Attribution Accuracy**: `92.40%`
-- **Macro Precision**: `0.9215`
-- **Macro Recall**: `0.9240`
-- **Macro F1-Score**: `0.9225`
+- **Macro Precision**: `0.9215` | **Macro Recall**: `0.9240` | **Macro F1-Score**: `0.9225`
 
 ---
 
