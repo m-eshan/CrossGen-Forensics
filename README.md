@@ -1,9 +1,11 @@
-# 🔬 Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators
+# 🛡️ AI-Fake-Image-Detector: Generalization & Attribution Framework
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg)](https://pytorch.org/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Notebooks-20BEFF.svg)](https://www.kaggle.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**AI-Fake-Image-Detector** is an open-source deep learning framework designed to evaluate the generalization capability of image forgery detectors across Generative Adversarial Networks (GANs) and modern Diffusion models (Stable Diffusion 2.1/3/XL, DALL-E 3, Midjourney v6). The system performs both binary Real vs. AI-Generated image classification and 6-class source generator attribution, specifically benchmarking performance under leave-one-generator-out settings and cross-technology transfers.
 
 ---
 
@@ -55,7 +57,7 @@ deep_learning_lab_project/
 │   └── README.md                          # Detailed dataset acquisition & metadata schema guide
 ├── scripts/
 │   ├── evaluate.py                        # Standalone local batch evaluation script
-│   └── generate_results_and_assets.py     # Figure & asset generation script
+│   └── generate_results_and_assets.py     # Figure & asset plotting script
 ├── demo_predictor.py                      # Interactive CLI visual prediction demo
 ├── RESULTS.md                             # Detailed visual results & performance analysis report
 ├── CITATION.cff                           # Repository citation metadata
@@ -149,7 +151,7 @@ If you use this benchmark codebase, pipeline, or research findings in your work,
 ```bibtex
 @misc{m2026aifakedetector,
   author       = {Eshan M},
-  title        = {Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators},
+  title        = {AI-Fake-Image-Detector: Generalization & Attribution Framework across GAN and Diffusion Models},
   year         = {2026},
   publisher    = {GitHub},
   howpublished = {\url{https://github.com/m-eshan/AI-Fake-Image-Detector}}
