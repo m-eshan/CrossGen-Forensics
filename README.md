@@ -87,45 +87,37 @@ deep_learning_lab_project/
 
 For complete detailed figures and analysis, see [RESULTS.md](RESULTS.md).
 
-### 1. Binary Detection Benchmark (Precision, Recall, F1, AUROC)
+### 1. Binary Detection Benchmark (AUROC & Balanced Accuracy)
 
 ![Figure 1: Benchmark Comparison](assets/figure1_auc_benchmark_comparison.png)
 
-| Experiment Tag | Precision | Recall | F1-Score | ResNet-50 Finetuned AUC | ConvNeXt-Tiny AUC | ResNet-50 Bal. Acc. |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `seen_all` | **0.963** | **0.961** | **0.962** | **0.9915** | **0.9942** | **96.20%** |
-| `gan_to_diffusion` | 0.615 | 0.598 | 0.606 | 0.6485 | 0.6810 | 60.50% |
-| `diffusion_to_gan` | 0.668 | 0.655 | 0.661 | 0.7210 | 0.7450 | 66.10% |
-| `unseen_BigGAN` | 0.691 | 0.678 | 0.684 | 0.7480 | 0.7620 | 68.40% |
-| `unseen_DALL_E_3` | 0.792 | 0.779 | 0.785 | 0.8490 | 0.8640 | 78.50% |
-| `unseen_Midjourney_v6` | 0.808 | 0.795 | 0.801 | 0.8610 | 0.8790 | 80.10% |
-| `unseen_Stable_Diffusion_2_1` | 0.839 | 0.826 | 0.832 | 0.8920 | 0.9080 | 83.20% |
-| `unseen_Stable_Diffusion_3` | 0.821 | 0.809 | 0.815 | 0.8740 | 0.8890 | 81.50% |
-| `unseen_Stable_Diffusion_XL` | 0.835 | 0.823 | 0.829 | 0.8860 | 0.9010 | 82.90% |
+| Setting | Protocol Category | ResNet-50 (Frozen AUC) | ResNet-50 (Fine-tuned AUC) | ConvNeXt-Tiny (AUC) | ResNet-50 Bal. Acc. | ConvNeXt-T Bal. Acc. |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: |
+| `seen_all` | In-Distribution | 0.8791 | 0.9929 | **0.9951** | 95.72% | **96.83%** |
+| `gan_to_diffusion` | Cross-Generation | 0.6001 | 0.5242 | **0.7126** | 49.98% | **50.98%** |
+| `diffusion_to_gan` | Cross-Generation | 0.6270 | **0.6132** | 0.5909 | 49.35% | 49.80% |
+| `unseen_BigGAN` | Unseen Generator | 0.6256 | 0.5999 | — | 49.50% | — |
+| `unseen_DALL_E_3` | Unseen Generator | 0.7067 | 0.6189 | — | 51.00% | — |
+| `unseen_Midjourney_v6` | Unseen Generator | 0.9052 | 0.9732 | **0.9805** | 89.05% | **92.90%** |
+| `unseen_SD_2_1` | Unseen Generator | 0.7848 | 0.9416 | — | 79.30% | — |
+| `unseen_SD_3` | Unseen Generator | 0.7379 | 0.9279 | — | 78.90% | — |
+| `unseen_SD_XL` | Unseen Generator | 0.8320 | 0.9792 | — | 91.80% | — |
 
 ---
 
-### 2. ROC & Precision-Recall Curves
-
-| ROC Curves Comparison | Precision-Recall Curves |
-| :---: | :---: |
-| ![ROC Curves Comparison](assets/figure3_roc_curves_comparison.png) | ![Precision-Recall Curves](assets/figure6_precision_recall_curves.png) |
-
----
-
-### 3. Generator Attribution Confusion Matrix & Classification Report
+### 2. Generator Attribution Confusion Matrix & Classification Report
 
 ![Attribution Confusion Matrix](assets/figure2_attribution_confusion_matrix.png)
 
 | Generator Architecture | Precision | Recall | F1-Score | Support |
 | :--- | :---: | :---: | :---: | :---: |
-| **BigGAN** | 0.948 | 0.945 | 0.946 | 1,000 |
-| **DALL-E 3** | 0.929 | 0.915 | 0.922 | 1,000 |
-| **Midjourney v6** | 0.918 | 0.935 | 0.926 | 1,000 |
-| **Stable Diffusion 2.1** | 0.914 | 0.920 | 0.917 | 1,000 |
-| **Stable Diffusion 3** | 0.908 | 0.918 | 0.913 | 1,000 |
-| **Stable Diffusion XL** | 0.933 | 0.929 | 0.931 | 1,000 |
-| **Macro / Weighted Average** | **0.9250** | **0.9270** | **0.9258** | **6,000** |
+| **BigGAN** | 0.983 | 0.996 | 0.990 | 1,000 |
+| **DALL-E 3** | 0.981 | 0.993 | 0.987 | 1,000 |
+| **Midjourney v6** | 0.986 | 0.992 | 0.989 | 1,000 |
+| **Stable Diffusion 2.1** | 0.792 | 0.847 | 0.819 | 1,000 |
+| **Stable Diffusion 3** | 0.906 | 0.829 | 0.866 | 1,000 |
+| **Stable Diffusion XL** | 0.886 | 0.873 | 0.880 | 1,000 |
+| **Macro Average** | **0.922** | **0.922** | **0.922** | **6,000** |
 
 ---
 
