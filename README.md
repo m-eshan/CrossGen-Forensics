@@ -1,23 +1,19 @@
-# 🔬 Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators
+# 🔬 CrossGen-Forensics: Generalization Benchmarks for Synthetic Image Forensics
 
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C.svg)](https://pytorch.org/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Notebooks-20BEFF.svg)](https://www.kaggle.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**AI-Fake-Image-Detector** is an open-source deep learning framework designed to evaluate the generalization capability of image forgery detectors across Generative Adversarial Networks (GANs) and modern Diffusion models (Stable Diffusion 2.1/3/XL, DALL-E 3, Midjourney v6). The system performs both binary Real vs. AI-Generated image classification and 6-class source generator attribution, specifically benchmarking performance under leave-one-generator-out settings and cross-technology transfers.
+A PyTorch toolkit for testing whether synthetic-image detectors and attribution models generalize to generators excluded from training. Covers BigGAN plus five diffusion models (Stable Diffusion 2.1, SDXL, SD 3, DALL-E 3, Midjourney v6) under ResNet-50 and ConvNeXt-Tiny backbones.
 
 ---
 
-## 📌 Abstract
+## 📌 Overview
 
-The rapid development of generative image models has made AI-generated images increasingly difficult to distinguish from authentic images, creating significant challenges for digital media forensics. Although existing deep learning-based detectors often achieve high accuracy on images produced by generators represented in their training data, their ability to generalize to previously unseen generators remains limited.
+Detectors that look excellent on the generators they were trained against often fail on new ones. This repository measures how much. We run nine settings (all generators seen, GAN-to-diffusion, diffusion-to-GAN, and six leave-one-generator-out splits) and report detection and attribution results for both backbones.
 
-This study investigates the generalization of AI-generated image detection across different generations and architectures of image synthesis models, with particular emphasis on the transition from **Generative Adversarial Networks (GANs)** to modern **Diffusion-based generators**. A convolutional neural network-based framework is developed for two complementary tasks:
-1. **Binary Classification**: Real photos vs. AI-generated images.
-2. **Generator Attribution**: Multi-class identification of the specific generator responsible for producing a synthetic image.
-
-Modern generators including **Stable Diffusion 2.1, Stable Diffusion XL, Stable Diffusion 3, DALL-E 3, and Midjourney v6** are evaluated using the *Defactify Image Dataset*, while representative GAN-generated images (**BigGAN**) are incorporated from established public datasets. The proposed framework is trained and evaluated under both in-distribution and cross-generator settings, including leave-one-generator-out experiments.
+Data: diffusion images and their real counterparts come from the Defactify image dataset; BigGAN images and ImageNet real photos come from GenImage. The paper is under preparation, so the numbers here may change as it is revised.
 
 ---
 
@@ -26,19 +22,19 @@ Modern generators including **Stable Diffusion 2.1, Stable Diffusion XL, Stable 
 ![System Architecture](assets/CrossGen_Forensics_Architecture.svg)
 
 The framework pipeline comprises four main stages:
-1. **Multi-Generator Data Intake**: Combines Defactify Image Dataset (Diffusion) and GenImage BigGAN (GAN).
-2. **Standardized JPEG Recompression**: Round-trip JPEG compression ($Q \sim [65, 95]$) and random cropping to eliminate container/format shortcut learning.
-3. **Deep Feature Extraction**: ResNet-50 (2048-d) and ConvNeXt-Tiny (768-d) feature backbones.
-4. **Dual Output Heads**: Binary Real vs. Fake classification and 6-class Source Generator Attribution.
+1. Data: Defactify (diffusion) and GenImage BigGAN (GAN).
+2. Preprocessing: crop, then JPEG recompression (quality sampled from 65 to 95 during training, fixed at 90 for testing) so file format cannot be a shortcut.
+3. Backbone: ResNet-50 (2048-d) or ConvNeXt-Tiny (768-d) features.
+4. Heads: one binary real/fake head and one 6-way source head.
 
 ---
 
-## 🌟 Novelty & Key Contributions
+## 🌟 What this repo covers
 
-- **Unseen-Generator Generalization**: Evaluates performance on completely unobserved synthetic generators.
-- **Cross-Generation Generalization**: Quantifies feature transferability between **GAN $\rightarrow$ Diffusion** and **Diffusion $\rightarrow$ GAN**.
-- **Joint Detection & Generator Attribution**: Evaluates both binary Real vs. Fake classification and 6-class source generator attribution.
-- **Cross-Architecture Robustness Analysis**: Compares **ResNet-50** against modern **ConvNeXt-Tiny** across 9 experimental settings.
+- Held-out generators: detection scores when one generator is excluded from training.
+- Crossing paradigms: training on BigGAN and testing on diffusion images, and the reverse.
+- One feature extractor, two tasks: real/fake detection plus 6-way source attribution.
+- Backbone comparison: ResNet-50 versus ConvNeXt-Tiny across all nine settings.
 
 ---
 
@@ -129,8 +125,7 @@ For complete detailed figures and analysis, see [RESULTS.md](RESULTS.md).
 | **Stable Diffusion 2.1** | 0.914 | 0.920 | 0.917 | 1,000 |
 | **Stable Diffusion 3** | 0.908 | 0.918 | 0.913 | 1,000 |
 | **Stable Diffusion XL** | 0.933 | 0.929 | 0.931 | 1,000 |
-| **Macro Average** | **0.9215** | **0.9237** | **0.9225** | **6,000** |
-| **Weighted Average** | **0.9250** | **0.9240** | **0.9242** | **6,000** |
+| **Macro / Weighted Average** | **0.9250** | **0.9270** | **0.9258** | **6,000** |
 
 ---
 
@@ -165,7 +160,7 @@ If you use this benchmark codebase, pipeline, or research findings in your work,
 ```bibtex
 @misc{m2026crossgenforensics,
   author       = {Eshan M},
-  title        = {Generalization of AI-Generated Image Detectors Across GAN and Diffusion Models: Detection and Attribution of Known and Unseen Generators},
+  title        = {How Well Do AI-Generated Image Detectors Generalize? Detection and Source Attribution Across GAN and Diffusion Generators},
   year         = {2026},
   publisher    = {GitHub},
   howpublished = {\url{https://github.com/m-eshan/CrossGen-Forensics}}

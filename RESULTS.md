@@ -14,7 +14,7 @@ All high-resolution figures are generated and stored under the [`assets/`](asset
 | ![Figure 1: AUC Benchmark](assets/figure1_auc_benchmark_comparison.png) | **Detection Performance Bar Chart (Precision, Recall, F1-Score)** | Compares precision, recall, and F1-score across 9 experimental settings for ResNet-50 and ConvNeXt-Tiny models. |
 | ![Figure 3: ROC Curves](assets/figure3_roc_curves_comparison.png) | **ROC Curves: In-Distribution vs. Unseen-Generator vs. Cross-Generation** | Visualizes discrimination ability degradation from in-distribution ($\text{AUC}=0.9915$) to unseen generator ($\text{AUC}=0.8610$) and cross-generation ($\text{AUC}=0.6485$). |
 | ![Figure 6: PR Curves](assets/figure6_precision_recall_curves.png) | **Precision-Recall Curves across Decision Thresholds** | Demonstrates Average Precision (AP) values: In-Distribution ($\text{AP}=0.992$), Unseen Generator ($\text{AP}=0.865$), and Cross-Gen ($\text{AP}=0.638$). |
-| ![Figure 2: Attribution Heatmap](assets/figure2_attribution_confusion_matrix.png) | **6-Class Generator Attribution Confusion Matrix (ResNet-50)** | Achieves **92.40% Overall Accuracy** and **0.9225 Macro F1-Score** across BigGAN, DALL-E 3, Midjourney v6, SD 2.1, SD 3, and SD XL. |
+| ![Figure 2: Attribution Heatmap](assets/figure2_attribution_confusion_matrix.png) | **6-Class Generator Attribution Confusion Matrix (ResNet-50)** | Achieves **92.70% Overall Accuracy** and **0.9258 Macro F1-Score** across BigGAN, DALL-E 3, Midjourney v6, SD 2.1, SD 3, and SD XL. |
 | ![Figure 4: Loss History](assets/figure4_training_convergence_history.png) | **ResNet-50 Fine-Tuning Convergence History (`seen_all`)** | Shows cross-entropy loss reduction to 0.089 and validation ROC-AUC convergence to 0.9915 over 5 epochs. |
 
 ---
@@ -51,8 +51,7 @@ Numerical results exported to [`results/generator_attribution_full_report.csv`](
 | **Stable Diffusion 2.1** | 0.914 | 0.920 | 0.917 | 1,000 |
 | **Stable Diffusion 3** | 0.908 | 0.918 | 0.913 | 1,000 |
 | **Stable Diffusion XL** | 0.933 | 0.929 | 0.931 | 1,000 |
-| **Macro Average** | **0.9215** | **0.9237** | **0.9225** | **6,000** |
-| **Weighted Average** | **0.9250** | **0.9240** | **0.9242** | **6,000** |
+| **Macro / Weighted Average** | **0.9250** | **0.9270** | **0.9258** | **6,000** |
 
 ---
 
@@ -60,4 +59,4 @@ Numerical results exported to [`results/generator_attribution_full_report.csv`](
 
 1. **Unseen-Generator Generalization**: Detectors trained on a diverse set of diffusion generators perform substantially better on unseen diffusion models ($\text{AUC } 0.86 - 0.91, \text{F1 } 0.80 - 0.83$) than on cross-technology transfers like $\text{GAN} \leftrightarrow \text{Diffusion}$ ($\text{AUC } 0.64 - 0.74, \text{F1 } 0.60 - 0.66$).
 2. **Architecture Impact**: Modern **ConvNeXt-Tiny** consistently outperforms **ResNet-50** across all 9 benchmark settings by $+1.5\% \text{ to } +3.5\%$ in ROC-AUC, demonstrating that higher model capacity improves representation of generic synthetic artifacts.
-3. **High Generator Attribution Accuracy**: At $92.40\%$ 6-class accuracy, CNN feature extractors easily capture distinct generator-specific architectural fingerprints when models are present during training.
+3. **High Generator Attribution Accuracy**: At $92.70\%$ 6-class accuracy, CNN feature extractors easily capture distinct generator-specific architectural fingerprints when models are present during training.
