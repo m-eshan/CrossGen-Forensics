@@ -1,0 +1,26 @@
+{
+  "id": "eshanm/05-evaluate-and-save-scores",
+  "title": "05_evaluate_and_save_scores",
+  "code_file": "05-evaluate-and-save-scores.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [
+    "gpu",
+    "evaluation",
+    "deepfake"
+  ],
+  "dataset_sources": [
+    "vtphatt2/genimage-biggan"
+  ],
+  "kernel_sources": [
+    "eshanm/ai-fake-image-detector",
+    "eshanm/02-train",
+    "eshanm/04-attribution"
+  ],
+  "competition_sources": [],
+  "model_sources": []
+}
