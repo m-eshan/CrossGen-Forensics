@@ -146,6 +146,7 @@ python scripts/evaluate.py --image_dir path/to/test_folder --checkpoint path/to/
 ## 🙏 Acknowledgements
 
 We gratefully acknowledge the creators and research teams behind the open datasets and architectures used in this work:
+- **Project Guidance & Supervision**: Dr. A. Sathya, for invaluable academic mentorship, technical guidance, and supervision.
 - **Defactify Image Dataset**: Rajarshi Roy et al., for creating and releasing the multi-generator dataset on Hugging Face.
 - **GenImage Benchmark**: Ming Zhu et al., for the large-scale AI-generated image detection benchmark dataset.
 - **BigGAN & ImageNet**: Andrew Brock et al. (BigGAN) and Jia Deng et al. (ImageNet).
