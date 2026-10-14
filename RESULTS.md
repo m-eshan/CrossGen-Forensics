@@ -10,10 +10,11 @@ All figures are located under [`assets/`](assets/):
 
 | Figure Asset | Description | Key Insight |
 | :--- | :--- | :--- |
-| ![System Architecture](assets/CrossGen_Forensics_Architecture.svg) | **Dedicated End-to-End System Architecture Diagram (Vector SVG)** | Multi-stage pipeline: Input Image $\rightarrow$ JPEG Recompression ($Q \sim [65, 95]$) $\rightarrow$ Dense Feature Backbone (ResNet-50 / ConvNeXt-Tiny) $\rightarrow$ Dual Output Heads (Binary Detection & 6-Class Attribution). |
+| ![System Architecture](assets/fig1_pipeline.png) | **Dedicated End-to-End System Architecture Diagram** | Multi-stage pipeline: Input Image $\rightarrow$ JPEG Recompression ($Q \sim [65, 95]$) $\rightarrow$ Dense Feature Backbone (ResNet-50 / ConvNeXt-Tiny) $\rightarrow$ Evaluation Heads (Binary Detection & 6-Class Attribution). |
 | ![Figure 1: AUC Benchmark](assets/figure1_auc_benchmark_comparison.png) | **Detection AUROC Performance Across Evaluation Protocols** | Compares linear probe (frozen), fine-tuned ResNet-50, and ConvNeXt-Tiny across in-distribution, cross-paradigm, and leave-one-generator-out settings. |
 | ![Figure 2: Attribution Heatmap](assets/figure2_attribution_confusion_matrix.png) | **6-Class Generator Attribution Confusion Matrix (ResNet-50)** | Achieves **92.17% Overall Accuracy** and **0.9216 Macro F1-Score** across BigGAN, DALL-E 3, Midjourney v6, SD 2.1, SD 3, and SDXL. |
-| ![Figure 4: Loss History](assets/figure4_training_convergence_history.png) | **ResNet-50 Fine-Tuning Convergence History (`seen_all`)** | Validation ROC-AUC convergence over fine-tuning epochs on the multi-generator dataset. |
+| ![Figure 3: ROC Curves](assets/figure3_real_roc_curves.png) | **Verified Receiver Operating Characteristic Curves** | Near-vertical climb for `seen_all` ($0.9930$), robust separation for `unseen_Midjourney_v6` ($0.9731$), and collapse for `gan_to_diffusion` ($0.5243$). |
+| ![Figure 4: PR Curves](assets/figure6_real_precision_recall_curves.png) | **Verified Precision-Recall Curves** | Demonstrates precision convergence to test-set synthetic prevalence at recall $1.0$ ($0.75$, $0.50$, and $0.833$). |
 
 ---
 

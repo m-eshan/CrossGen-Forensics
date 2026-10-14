@@ -19,13 +19,13 @@ Data: diffusion images and their real counterparts come from the Defactify image
 
 ## 🏗️ System Architecture & Framework
 
-![System Architecture](assets/CrossGen_Forensics_Architecture.svg)
+![System Architecture](assets/fig1_pipeline.png)
 
 The framework pipeline comprises four main stages:
 1. Data: Defactify (diffusion) and GenImage BigGAN (GAN).
 2. Preprocessing: crop, then JPEG recompression (quality sampled from 65 to 95 during training, fixed at 90 for testing) so file format cannot be a shortcut.
 3. Backbone: ResNet-50 (2048-d) or ConvNeXt-Tiny (768-d) features.
-4. Heads: one binary real/fake head and one 6-way source head.
+4. Forensic Evaluation: binary real/fake detection across distribution shifts and 6-way source attribution.
 
 ---
 
@@ -33,8 +33,8 @@ The framework pipeline comprises four main stages:
 
 - Held-out generators: detection scores when one generator is excluded from training.
 - Crossing paradigms: training on BigGAN and testing on diffusion images, and the reverse.
-- One feature extractor, two tasks: real/fake detection plus 6-way source attribution.
-- Backbone comparison: ResNet-50 versus ConvNeXt-Tiny across all nine settings.
+- Dual forensic tasks: binary real/fake detection plus 6-way source attribution.
+- Backbone comparison: ResNet-50 versus ConvNeXt-Tiny across benchmark settings.
 
 ---
 
@@ -43,18 +43,20 @@ The framework pipeline comprises four main stages:
 ```
 deep_learning_lab_project/
 ├── notebooks/
-│   ├── 01_ai_fake_image_detector/ai-fake-image-detector.ipynb  # UNTOUCHED original
-│   ├── 02_train/02-train.ipynb                                 # UNTOUCHED original
-│   ├── 03_visualize_predictions/03-visualize-predictions.ipynb # UNTOUCHED original
-│   └── 04_attribution/04-attribution.ipynb                     # UNTOUCHED original
+│   ├── 01_ai_fake_image_detector/ai-fake-image-detector.ipynb  # Dataset prep & Defactify splits
+│   ├── 02_train/02-train.ipynb                                 # ResNet-50 training pipeline
+│   ├── 03_visualize_predictions/03-visualize-predictions.ipynb # Visualization pipeline
+│   ├── 04_attribution/04-attribution.ipynb                     # 6-class attribution training
+│   └── 05_evaluate_and_save_scores/05-evaluate-and-save-scores.ipynb # Standalone score export & figures
 ├── assets/
-│   ├── CrossGen_Forensics_Architecture.svg     # Vector System Architecture Diagram (Super Quality)
-│   ├── figure1_auc_benchmark_comparison.png    # Precision, Recall, F1 & AUC Chart
-│   ├── figure3_roc_curves_comparison.png       # ROC Curves Comparison
-│   ├── figure6_precision_recall_curves.png     # Precision-Recall Curves
-│   ├── figure2_attribution_confusion_matrix.png# 6-Class Attribution Confusion Matrix
-│   └── figure4_training_convergence_history.png# Loss & Validation AUC Trajectory
+│   ├── fig1_pipeline.png                       # End-to-End System Architecture Diagram
+│   ├── figure1_auc_benchmark_comparison.png    # 9-Protocol AUROC Benchmark Comparison
+│   ├── figure2_attribution_confusion_matrix.png# 6-Class Source Attribution Confusion Matrix
+│   ├── figure3_real_roc_curves.png             # Verified Receiver Operating Characteristic Curves
+│   └── figure6_real_precision_recall_curves.png# Verified Precision-Recall Curves
 ├── results/
+│   ├── scores/                                 # Raw per-image y_true and y_score (.npz arrays)
+│   ├── table1_binary_detection_benchmark.csv
 │   ├── binary_detection_full_metrics.csv
 │   └── generator_attribution_full_report.csv
 ├── datasets/
@@ -65,7 +67,6 @@ deep_learning_lab_project/
 ├── demo_predictor.py                           # Interactive CLI visual predictor
 ├── RESULTS.md                                  # Detailed visual results & performance report
 ├── CITATION.cff                                # Repository citation metadata
-├── references.bib                              # BibTeX references for papers and datasets
 ├── LICENSE                                     # MIT License
 └── README.md                                   # Main project documentation
 ```
